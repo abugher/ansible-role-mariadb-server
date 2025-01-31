@@ -1,0 +1,20 @@
+---
+install_packages:
+  - 'mariadb-server'
+install_files:
+  - owner:                      'root'
+    group:                      'root'
+    mode:                       '0644'
+    src:                        'files/mariadb-secure-installation-answers.txt'
+    dest:                       '/etc/mysql/mariadb-secure-installation-answers.txt'
+  - owner:                      'root'
+    group:                      'root'
+    mode:                       '0644'
+    src:                        'files/auth_pam.cnf'
+    dest:                       '/etc/mysql/mariadb.conf.d/auth_pam.cnf'
+restart_services:
+  - 'mariadb'
+start_services:
+  - 'mariadb'
+shell_commands:
+  - command:                    mariadb-secure-installation < /etc/mysql/mariadb-secure-installation-answers.txt
